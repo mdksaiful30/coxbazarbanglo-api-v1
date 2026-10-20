@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /bookings/{id}/shares
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/bookings/{{booking_id}}/shares"
+method: GET
+headers:
+  Accept: application/json
+order: 16000

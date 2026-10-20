@@ -1,0 +1,67 @@
+@reference "./app.css";
+
+@page {
+  size: A4;
+  margin: 10mm;
+}
+* {
+  @apply box-border;
+}
+body {
+  @apply m-0 [background:#fff] text-[#243e36] [font:12px/1.45_Arial,'Nirmala_UI','Noto_Sans_Bengali',sans-serif];
+}
+.document {
+  @apply p-[18px_24px] max-w-[794px] m-auto;
+}
+header {
+  @apply [border-bottom:3px_solid_#126b61] pb-[16px] mb-[20px];
+}
+.kicker {
+  @apply text-[10px] tracking-[2px] text-[#688d7e];
+}
+h1 {
+  @apply text-[23px] m-[8px_0] leading-[1.35];
+}
+h2 {
+  @apply text-[21px] m-[5px_0];
+}
+h3 {
+  @apply text-[14px] text-[#126b61] m-[20px_0_8px];
+}
+p {
+  @apply m-[5px_0];
+}
+.muted {
+  @apply text-[#6f8379];
+}
+.heading {
+  @apply flex justify-between items-center mb-[18px];
+}
+.status {
+  @apply [background:#edf7ef] text-[#186d52] p-[7px_12px] [border:1px_solid_#cfe5d8] rounded-[5px] capitalize;
+}
+.warning {
+  @apply [background:#fff7df] p-[12px] m-[16px_0];
+}
+table {
+  @apply w-full border-collapse table-fixed text-[12px];
+}
+th,
+td {
+  @apply p-[6px_10px] [border:1px_solid_#e3ebe6] text-left align-top wrap-anywhere;
+}
+th {
+  @apply w-[33%] [background:#f4f8f5] text-[#617a6d] text-[11px];
+}
+tr {
+  @apply break-inside-avoid;
+}
+h3 {
+  @apply break-after-avoid;
+}
+.note {
+  @apply text-[10px] text-[#6f8379] mt-[10px];
+}
+footer {
+  @apply text-[10px] text-[#789083] [border-top:1px_solid_#dee8e2] pt-[14px] mt-[20px] break-inside-avoid;
+}

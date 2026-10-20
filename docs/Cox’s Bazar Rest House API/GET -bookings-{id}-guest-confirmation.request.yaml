@@ -1,0 +1,12 @@
+$kind: http-request
+name: GET /bookings/{id}/guest-confirmation
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/bookings/{{booking_id}}/guest-confirmation"
+method: GET
+headers:
+  Accept: application/json
+scripts:
+  - type: afterResponse
+    code: if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set("booking_id",d.id);pm.collectionVariables.set("booking_version",d.version);}}
+    language: text/javascript
+order: 14000

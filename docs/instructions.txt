@@ -1,0 +1,25 @@
+In considering below description create appropriate prompt for Application database creation, website development using Laravel 13 with vue.js. make Rest API for developing flutter apps. Create complete guide lines for developing application and apps
+
+
+We have 3 stored building which is used for rest house. I want to make a booking system for gust. Only admin and admin-staff can be able to make Booking for room. There are a pricing list of all guest divided different categories. Here is the attachment for all info about Cox'sbazar Rest House.
+
+1. admin or staff-admin can be book with the guest name, Designation, mobile, CheckIn Date, CheckOut Date, Ref Letter No, Payment Status, Guest Category, Room Allocation etc
+
+2. admin can book and approved of gust booking by staff-admin but staff-admin can only input data and required admin approval
+
+3. When booked confirmed by admin then a messege should be sent to guest whatsapp or messege or email 
+
+4. there should be a list items about room rents (see ছক: বিআইডব্লিউটিএ'র  কক্সবাজার পরিদর্শন বাংলো ভাড়া ( শুল্কহার, ২০২৬ এর তফসিল-৫ অনুযায়ী in attachment) which can be selected by admin or staff-admin when booking. After paid the gust then rooms Status should be vacant
+
+5. When a rooms booked then it should be show booked as well as disable by clicking..
+
+6. Admin can be reserved room by fixed times
+
+7. There need a calender style booking information showing
+
+8. etc.....
+
+9. you can create logic of prompt about this types of booking systems
+
+
+Note: I will developed the application using Laravel 13 and vue.js/blade template for website as well as endpoint of every entities should be convert to  REST API where i will make Flutter apps later

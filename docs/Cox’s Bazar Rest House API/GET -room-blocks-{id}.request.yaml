@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /room-blocks/{id}
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/room-blocks/{{id}}"
+method: GET
+headers:
+  Accept: application/json
+order: 40000

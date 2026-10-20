@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /users/{id}
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/users/{{id}}"
+method: GET
+headers:
+  Accept: application/json
+order: 47000

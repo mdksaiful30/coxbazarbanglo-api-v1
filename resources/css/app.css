@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600&display=swap');
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@source "../views";
+@source "../js";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@import './components.css';
+@import './responsive.css';
+@import './typography.css';
+
+/* Shared tokens are available to both template utilities and component recipes. */
+@theme inline {
+  --font-sans: 'Roboto', 'Noto Sans Bengali', system-ui, sans-serif;
+  --color-brand: var(--teal);
+  --color-muted: var(--muted);
+  --color-divider: var(--border);
+}

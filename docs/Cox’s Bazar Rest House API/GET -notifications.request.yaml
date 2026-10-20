@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /notifications
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/notifications"
+method: GET
+headers:
+  Accept: application/json
+order: 32000

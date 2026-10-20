@@ -1,0 +1,5895 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Cox's Bazar Rest House API",
+    "version": "1.2.0",
+    "description": "Authenticated administrative API. Money is integer poisha. Booking timestamps are Dhaka-local. See API.md for exact lifecycle and integration conventions."
+  },
+  "servers": [
+    {
+      "url": "https://coxbazarbanglo.learnwithzaman.com/api/v1",
+      "description": "Production"
+    },
+    {
+      "url": "http://127.0.0.1:8013/api/v1",
+      "description": "Local development"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/attachments/{id}/download": {
+      "get": {
+        "summary": "GET /attachments/{id}/download",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_attachments_id_download",
+        "responses": {
+          "200": {
+            "description": "Authenticated private download. Save response bytes as a file.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/audit-logs": {
+      "get": {
+        "summary": "GET /audit-logs",
+        "description": "Administrator only. ",
+        "operationId": "get_audit_logs",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/devices": {
+      "get": {
+        "summary": "GET /auth/devices",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_auth_devices",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/devices/{id}": {
+      "delete": {
+        "summary": "DELETE /auth/devices/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "delete_auth_devices_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "POST /auth/forgot-password",
+        "operationId": "post_auth_forgot_password",
+        "description": "Public endpoint. ",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "{{email}}"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "POST /auth/logout",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "post_auth_logout",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "summary": "GET /auth/me",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_auth_me",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/mobile/login": {
+      "post": {
+        "summary": "POST /auth/mobile/login",
+        "description": "Public endpoint. ",
+        "operationId": "post_auth_mobile_login",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "{{email}}"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "{{password}}"
+                  },
+                  "device_name": {
+                    "type": "string",
+                    "example": "Postman device"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password",
+                  "device_name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/password": {
+      "put": {
+        "summary": "PUT /auth/password",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "put_auth_password",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "current_password",
+                  "password",
+                  "password_confirmation"
+                ],
+                "properties": {
+                  "current_password": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/preferences": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /auth/preferences",
+        "operationId": "get_auth_preferences",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": []
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "PATCH /auth/preferences",
+        "operationId": "patch_auth_preferences",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "theme": {
+                    "type": "string",
+                    "enum": [
+                      "light",
+                      "dark",
+                      "system"
+                    ],
+                    "example": "dark"
+                  },
+                  "language": {
+                    "type": "string",
+                    "enum": [
+                      "en",
+                      "bn"
+                    ],
+                    "example": "en"
+                  }
+                },
+                "required": [
+                  "theme",
+                  "language"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "POST /auth/reset-password",
+        "operationId": "post_auth_reset_password",
+        "description": "Public endpoint. ",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "{{email}}"
+                  },
+                  "token": {
+                    "type": "string",
+                    "example": "{{reset_token}}"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "{{new_password}}"
+                  },
+                  "password_confirmation": {
+                    "type": "string",
+                    "example": "{{new_password}}"
+                  }
+                },
+                "required": [
+                  "email",
+                  "token",
+                  "password",
+                  "password_confirmation"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/availability": {
+      "get": {
+        "summary": "GET /availability",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_availability",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "check_in_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2027-01-01T14:00:00+06:00"
+            }
+          },
+          {
+            "name": "check_out_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2027-01-05T12:00:00+06:00"
+            }
+          },
+          {
+            "name": "exclude_booking_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/booking-amendments/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /booking-amendments/{id}",
+        "operationId": "get_booking_amendments_id",
+        "description": "Administrator only. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/booking-amendments/{id}/approve": {
+      "post": {
+        "summary": "POST /booking-amendments/{id}/approve",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_booking_amendments_id_approve",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/booking-amendments/{id}/reject": {
+      "post": {
+        "summary": "POST /booking-amendments/{id}/reject",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_booking_amendments_id_reject",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/booking-quotes": {
+      "post": {
+        "summary": "POST /booking-quotes",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "post_booking_quotes",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "guest_category_id",
+                  "room_ids",
+                  "check_in_at",
+                  "check_out_at"
+                ],
+                "properties": {
+                  "guest_id": {
+                    "type": "integer"
+                  },
+                  "guest_category_id": {
+                    "type": "integer"
+                  },
+                  "tariff_version_id": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "room_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "minItems": 1
+                  },
+                  "check_in_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "check_out_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "reference_letter": {
+                    "type": "string"
+                  },
+                  "reference_date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "guest_count": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "purpose": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings": {
+      "get": {
+        "summary": "GET /bookings",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_bookings",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /bookings",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_bookings",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingInput"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}": {
+      "get": {
+        "summary": "GET /bookings/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_bookings_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "summary": "PATCH /bookings/{id}",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "patch_bookings_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BookingInput"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "version"
+                    ],
+                    "properties": {
+                      "version": {
+                        "type": "integer"
+                      },
+                      "reason": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/amendments": {
+      "post": {
+        "summary": "POST /bookings/{id}/amendments",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_bookings_id_amendments",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BookingInput"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "version",
+                      "reason"
+                    ],
+                    "properties": {
+                      "version": {
+                        "type": "integer"
+                      },
+                      "reason": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/approve": {
+      "post": {
+        "summary": "POST /bookings/{id}/approve",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "operationId": "post_bookings_id_approve",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transition"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/approved-details": {
+      "patch": {
+        "summary": "PATCH /bookings/{id}/approved-details",
+        "operationId": "patch_bookings_id_approved_details",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BookingInput"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "version",
+                      "reason"
+                    ],
+                    "properties": {
+                      "version": {
+                        "type": "integer"
+                      },
+                      "reason": {
+                        "type": "string"
+                      },
+                      "notify_guest": {
+                        "type": "boolean"
+                      },
+                      "guest_details": {
+                        "$ref": "#/components/schemas/Guest"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Revised booking in data"
+          },
+          "403": {
+            "description": "Admin role required"
+          },
+          "409": {
+            "description": "Conflicting rooms, stale version or unsupported lifecycle"
+          },
+          "422": {
+            "description": "Invalid stay, capacity, tariff or financial adjustment"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/attachments": {
+      "post": {
+        "summary": "POST /bookings/{id}/attachments",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "post_bookings_id_attachments",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/cancel": {
+      "post": {
+        "summary": "POST /bookings/{id}/cancel",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "operationId": "post_bookings_id_cancel",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transition"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/check-in": {
+      "post": {
+        "summary": "POST /bookings/{id}/check-in",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "operationId": "post_bookings_id_check_in",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transition"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/check-out": {
+      "post": {
+        "summary": "POST /bookings/{id}/check-out",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "operationId": "post_bookings_id_check_out",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transition"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/credit-notes": {
+      "post": {
+        "summary": "POST /bookings/{id}/credit-notes",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_bookings_id_credit_notes",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoneyReason"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/exports/jpg": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Authenticated private download. Save response bytes as a file.",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Configure Node.js, puppeteer-core and a local Chromium browser."
+          }
+        },
+        "summary": "GET /bookings/{id}/exports/jpg",
+        "operationId": "get_bookings_id_exports_jpg",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/exports/pdf": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Authenticated private download. Save response bytes as a file.",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Configure Node.js, puppeteer-core and a local Chromium browser."
+          }
+        },
+        "summary": "GET /bookings/{id}/exports/pdf",
+        "operationId": "get_bookings_id_exports_pdf",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/guest-confirmation": {
+      "get": {
+        "summary": "GET /bookings/{id}/guest-confirmation",
+        "operationId": "get_bookings_id_guest_confirmation",
+        "description": "Authenticated active staff/admin. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Guest-facing confirmation in data"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Disabled/unauthorized account"
+          },
+          "404": {
+            "description": "Booking not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/mark-no-show": {
+      "post": {
+        "summary": "POST /bookings/{id}/mark-no-show",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "operationId": "post_bookings_id_mark_no_show",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transition"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/payments": {
+      "post": {
+        "summary": "POST /bookings/{id}/payments",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_bookings_id_payments",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/reject": {
+      "post": {
+        "summary": "POST /bookings/{id}/reject",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "operationId": "post_bookings_id_reject",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transition"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/return-for-correction": {
+      "post": {
+        "summary": "POST /bookings/{id}/return-for-correction",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "operationId": "post_bookings_id_return_for_correction",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transition"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/share": {
+      "post": {
+        "responses": {
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "202": {
+            "description": "Queued only; inspect delivery history for status."
+          },
+          "503": {
+            "description": "Messaging provider is not configured."
+          }
+        },
+        "summary": "POST /bookings/{id}/share",
+        "operationId": "post_bookings_id_share",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Recipient is the saved booking guest; arbitrary recipients are prohibited. Email supports PDF/JPG attachments; SMS and WhatsApp use text/approved templates. Use native device sharing for WhatsApp file attachments.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "type": "string",
+                    "enum": [
+                      "email",
+                      "sms",
+                      "whatsapp"
+                    ],
+                    "example": "email"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "text",
+                      "pdf",
+                      "jpg"
+                    ],
+                    "example": "pdf"
+                  },
+                  "version": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                },
+                "required": [
+                  "channel",
+                  "version"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bookings/{id}/share-options": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /bookings/{id}/share-options",
+        "operationId": "get_bookings_id_share_options",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/shares": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /bookings/{id}/shares",
+        "operationId": "get_bookings_id_shares",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/submit": {
+      "post": {
+        "summary": "POST /bookings/{id}/submit",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_bookings_id_submit",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transition"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/buildings": {
+      "get": {
+        "summary": "GET /buildings",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_buildings",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /buildings",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_buildings",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "property_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Main building"
+                  }
+                },
+                "required": [
+                  "property_id",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/buildings/{id}": {
+      "get": {
+        "summary": "GET /buildings/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_buildings_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "PUT /buildings/{id}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "put_buildings_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "property_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Main building"
+                  }
+                },
+                "required": [
+                  "property_id",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/calendar": {
+      "get": {
+        "summary": "GET /calendar",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_calendar",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2027-01-01"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2027-01-31"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/catalog": {
+      "get": {
+        "summary": "GET /catalog",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_catalog",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/credit-notes": {
+      "get": {
+        "summary": "GET /credit-notes",
+        "description": "Administrator only. ",
+        "operationId": "get_credit_notes",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/credit-notes/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /credit-notes/{id}",
+        "operationId": "get_credit_notes_id",
+        "description": "Administrator only. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "summary": "GET /dashboard",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_dashboard",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/floors": {
+      "get": {
+        "summary": "GET /floors",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_floors",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /floors",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_floors",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "building_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "number": {
+                    "type": "integer",
+                    "example": 3
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Third floor"
+                  }
+                },
+                "required": [
+                  "building_id",
+                  "number",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/floors/{id}": {
+      "get": {
+        "summary": "GET /floors/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_floors_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "PUT /floors/{id}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "put_floors_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "building_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "number": {
+                    "type": "integer",
+                    "example": 3
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Third floor"
+                  }
+                },
+                "required": [
+                  "building_id",
+                  "number",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/guest-categories": {
+      "get": {
+        "summary": "GET /guest-categories",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_guest_categories",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /guest-categories",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_guest_categories",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "example": "D"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "New category"
+                  },
+                  "max_nights": {
+                    "type": "integer",
+                    "example": 10
+                  }
+                },
+                "required": [
+                  "code",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/guest-categories/{id}": {
+      "get": {
+        "summary": "GET /guest-categories/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_guest_categories_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "PUT /guest-categories/{id}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "put_guest_categories_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "example": "D"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "New category"
+                  },
+                  "max_nights": {
+                    "type": "integer",
+                    "example": 10
+                  }
+                },
+                "required": [
+                  "code",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/guests": {
+      "get": {
+        "summary": "GET /guests",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_guests",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /guests",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "post_guests",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Guest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/guests/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /guests/{id}",
+        "operationId": "get_guests_id",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "PUT /guests/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "put_guests_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Guest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/invoices": {
+      "get": {
+        "summary": "GET /invoices",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_invoices",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/invoices/{id}": {
+      "get": {
+        "summary": "GET /invoices/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_invoices_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messaging/twilio/status": {
+      "post": {
+        "summary": "POST /messaging/twilio/status",
+        "operationId": "post_messaging_twilio_status",
+        "security": [],
+        "description": "Public endpoint. ",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "AccountSid",
+                  "MessageSid",
+                  "MessageStatus"
+                ],
+                "properties": {
+                  "AccountSid": {
+                    "type": "string"
+                  },
+                  "MessageSid": {
+                    "type": "string"
+                  },
+                  "MessageStatus": {
+                    "type": "string"
+                  },
+                  "ErrorCode": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verified callback accepted; duplicate/older states do not regress delivery."
+          },
+          "403": {
+            "description": "Invalid signature/account"
+          },
+          "404": {
+            "description": "Unknown message"
+          },
+          "503": {
+            "description": "Provider not configured"
+          }
+        }
+      }
+    },
+    "/notifications": {
+      "get": {
+        "summary": "GET /notifications",
+        "description": "Administrator only. ",
+        "operationId": "get_notifications",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/notifications/{id}/retry": {
+      "post": {
+        "summary": "POST /notifications/{id}/retry",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_notifications_id_retry",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/payments": {
+      "get": {
+        "summary": "GET /payments",
+        "description": "Administrator only. ",
+        "operationId": "get_payments",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/payments/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /payments/{id}",
+        "operationId": "get_payments_id",
+        "description": "Administrator only. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/payments/{id}/refunds": {
+      "post": {
+        "summary": "POST /payments/{id}/refunds",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_payments_id_refunds",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoneyReason"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/payments/{id}/reverse": {
+      "post": {
+        "summary": "POST /payments/{id}/reverse",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_payments_id_reverse",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reason"
+                ],
+                "properties": {
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/properties": {
+      "get": {
+        "summary": "GET /properties",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_properties",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /properties",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_properties",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Rest house"
+                  },
+                  "address": {
+                    "type": "string",
+                    "example": "Cox’s Bazar"
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "example": "Asia/Dhaka"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/properties/{id}": {
+      "get": {
+        "summary": "GET /properties/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_properties_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "PUT /properties/{id}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "put_properties_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Rest house"
+                  },
+                  "address": {
+                    "type": "string",
+                    "example": "Cox’s Bazar"
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "example": "Asia/Dhaka"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/reports": {
+      "get": {
+        "summary": "GET /reports",
+        "description": "Administrator only. ",
+        "operationId": "get_reports",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2027-01-01"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2027-01-31"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/reports/export": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Authenticated private download. Save response bytes as a file.",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /reports/export",
+        "operationId": "get_reports_export",
+        "description": "Administrator only. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2027-01-01"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2027-01-31"
+            }
+          }
+        ]
+      }
+    },
+    "/room-blocks": {
+      "get": {
+        "summary": "GET /room-blocks",
+        "description": "Administrator only. ",
+        "operationId": "get_room_blocks",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /room-blocks",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_room_blocks",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "kind",
+                  "reason",
+                  "room_ids",
+                  "starts_at",
+                  "ends_at"
+                ],
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "reservation",
+                      "maintenance"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "room_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "starts_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "ends_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/room-blocks/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /room-blocks/{id}",
+        "operationId": "get_room_blocks_id",
+        "description": "Administrator only. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/room-blocks/{id}/release": {
+      "post": {
+        "summary": "POST /room-blocks/{id}/release",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_room_blocks_id_release",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reason"
+                ],
+                "properties": {
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/rooms": {
+      "get": {
+        "summary": "GET /rooms",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_rooms",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /rooms",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_rooms",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "floor_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "code": {
+                    "type": "string",
+                    "example": "R401"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "New room"
+                  },
+                  "ac_type": {
+                    "type": "string",
+                    "enum": [
+                      "ac",
+                      "non_ac"
+                    ]
+                  },
+                  "bed_type": {
+                    "type": "string",
+                    "example": "double"
+                  },
+                  "room_type": {
+                    "type": "string",
+                    "example": "standard"
+                  },
+                  "capacity": {
+                    "type": "integer",
+                    "example": 2
+                  },
+                  "bookable": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "housekeeping": {
+                    "type": "string",
+                    "enum": [
+                      "unverified",
+                      "ready",
+                      "needs_cleaning",
+                      "cleaning"
+                    ]
+                  }
+                },
+                "required": [
+                  "floor_id",
+                  "code",
+                  "name",
+                  "ac_type",
+                  "bed_type",
+                  "room_type",
+                  "capacity",
+                  "bookable",
+                  "housekeeping"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/rooms/{id}": {
+      "get": {
+        "summary": "GET /rooms/{id}",
+        "description": "Authenticated active staff/admin. ",
+        "operationId": "get_rooms_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "PUT /rooms/{id}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "put_rooms_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "floor_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "code": {
+                    "type": "string",
+                    "example": "R401"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "New room"
+                  },
+                  "ac_type": {
+                    "type": "string",
+                    "enum": [
+                      "ac",
+                      "non_ac"
+                    ]
+                  },
+                  "bed_type": {
+                    "type": "string",
+                    "example": "double"
+                  },
+                  "room_type": {
+                    "type": "string",
+                    "example": "standard"
+                  },
+                  "capacity": {
+                    "type": "integer",
+                    "example": 2
+                  },
+                  "bookable": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "housekeeping": {
+                    "type": "string",
+                    "enum": [
+                      "unverified",
+                      "ready",
+                      "needs_cleaning",
+                      "cleaning"
+                    ]
+                  }
+                },
+                "required": [
+                  "floor_id",
+                  "code",
+                  "name",
+                  "ac_type",
+                  "bed_type",
+                  "room_type",
+                  "capacity",
+                  "bookable",
+                  "housekeeping"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "summary": "PATCH /rooms/{id}",
+        "description": "Administrator only. ",
+        "operationId": "patch_rooms_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "capacity": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 20
+                  },
+                  "bookable": {
+                    "type": "boolean"
+                  },
+                  "housekeeping": {
+                    "type": "string",
+                    "enum": [
+                      "unverified",
+                      "ready",
+                      "needs_cleaning",
+                      "cleaning"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/settings": {
+      "get": {
+        "summary": "GET /settings",
+        "description": "Administrator only. ",
+        "operationId": "get_settings",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tariffs": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /tariffs",
+        "operationId": "get_tariffs",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": []
+      }
+    },
+    "/tariffs/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /tariffs/{id}",
+        "operationId": "get_tariffs_id",
+        "description": "Authenticated active staff/admin. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/tariffs/{id}/activate": {
+      "post": {
+        "summary": "POST /tariffs/{id}/activate",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_tariffs_id_activate",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "calculation_mode",
+                  "effective_from",
+                  "check_in_time",
+                  "check_out_time",
+                  "turnaround_minutes",
+                  "notification_channel",
+                  "policy_acknowledged",
+                  "reason"
+                ],
+                "properties": {
+                  "calculation_mode": {
+                    "type": "string",
+                    "enum": [
+                      "progressive",
+                      "whole_stay"
+                    ]
+                  },
+                  "effective_from": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "check_in_time": {
+                    "type": "string",
+                    "example": "14:00"
+                  },
+                  "check_out_time": {
+                    "type": "string",
+                    "example": "12:00"
+                  },
+                  "turnaround_minutes": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "notification_channel": {
+                    "type": "string",
+                    "enum": [
+                      "email",
+                      "sms",
+                      "whatsapp"
+                    ]
+                  },
+                  "policy_acknowledged": {
+                    "type": "boolean",
+                    "const": true
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tariffs/{id}/clone": {
+      "post": {
+        "summary": "POST /tariffs/{id}/clone",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_tariffs_id_clone",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "reference"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "reference": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tariffs/{id}/rates/{rateId}": {
+      "patch": {
+        "summary": "PATCH /tariffs/{id}/rates/{rateId}",
+        "description": "Administrator only. ",
+        "operationId": "patch_tariffs_id_rates_rateId",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "rateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "amount_minor"
+                ],
+                "properties": {
+                  "amount_minor": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "GET /users",
+        "description": "Administrator only. ",
+        "operationId": "get_users",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST /users",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "operationId": "post_users",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "role",
+                  "active",
+                  "password"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "admin",
+                      "staff_admin"
+                    ]
+                  },
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 12
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "summary": "PUT /users/{id}",
+        "description": "Administrator only. ",
+        "operationId": "put_users_id",
+        "responses": {
+          "200": {
+            "description": "Success; resource or result in data unless paginated."
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "Not permitted"
+          },
+          "404": {
+            "description": "Resource unavailable"
+          },
+          "409": {
+            "description": "Allocation conflict, stale version or invalid lifecycle"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "201": {
+            "description": "Resource created, where applicable."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "role",
+                  "active"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "admin",
+                      "staff_admin"
+                    ]
+                  },
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 12
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        },
+        "summary": "GET /users/{id}",
+        "operationId": "get_users_id",
+        "description": "Administrator only. ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/version": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Public release metadata; no account or infrastructure details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "application_version",
+                        "api_version",
+                        "api_base_path"
+                      ],
+                      "properties": {
+                        "application_version": {
+                          "type": "string",
+                          "example": "1.2.0"
+                        },
+                        "api_version": {
+                          "type": "string",
+                          "enum": [
+                            "v1"
+                          ]
+                        },
+                        "api_base_path": {
+                          "type": "string",
+                          "enum": [
+                            "/api/v1"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "GET /version",
+        "operationId": "get_version",
+        "description": "Public endpoint. ",
+        "security": [],
+        "parameters": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Guest": {
+        "type": "object",
+        "required": [
+          "name",
+          "mobile"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "designation": {
+            "type": "string"
+          },
+          "organization": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        }
+      },
+      "BookingInput": {
+        "type": "object",
+        "required": [
+          "guest_id",
+          "guest_category_id",
+          "room_ids",
+          "check_in_at",
+          "check_out_at"
+        ],
+        "properties": {
+          "guest_id": {
+            "type": "integer"
+          },
+          "guest_category_id": {
+            "type": "integer"
+          },
+          "tariff_version_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "room_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 1
+          },
+          "check_in_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "check_out_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reference_letter": {
+            "type": "string"
+          },
+          "reference_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "guest_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "Transition": {
+        "type": "object",
+        "required": [
+          "version"
+        ],
+        "properties": {
+          "version": {
+            "type": "integer"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reservation_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "required": [
+          "amount_minor",
+          "method"
+        ],
+        "properties": {
+          "amount_minor": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "cash",
+              "bank_transfer",
+              "other"
+            ]
+          },
+          "reference": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "MoneyReason": {
+        "type": "object",
+        "required": [
+          "amount_minor",
+          "reason"
+        ],
+        "properties": {
+          "amount_minor": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "object"
+          },
+          "request_id": {
+            "type": "string"
+          }
+        }
+      },
+      "MobileLogin": {
+        "type": "object",
+        "required": [
+          "email",
+          "password",
+          "device_name"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string"
+          },
+          "device_name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

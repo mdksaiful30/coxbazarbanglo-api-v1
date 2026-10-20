@@ -1,0 +1,16 @@
+$kind: http-request
+name: PUT /guests/{id}
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/guests/{{id}}"
+method: PUT
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Example Guest",
+      "mobile": "+8801712345678"
+    }
+order: 92000

@@ -1,0 +1,18 @@
+$kind: http-request
+name: PUT /users/{id}
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/users/{{id}}"
+method: PUT
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Example Guest",
+      "email": "guest@example.test",
+      "role": "admin",
+      "active": false
+    }
+order: 95000

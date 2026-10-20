@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /payments
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/payments"
+method: GET
+headers:
+  Accept: application/json
+order: 33000

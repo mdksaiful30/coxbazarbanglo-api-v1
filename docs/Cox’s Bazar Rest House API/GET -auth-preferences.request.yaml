@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /auth/preferences
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/auth/preferences"
+method: GET
+headers:
+  Accept: application/json
+order: 7000

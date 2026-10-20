@@ -1,0 +1,1061 @@
+@layer components {
+  :root {
+    @apply font-sans text-[#203e3b] [background:#f5f7f6] [font-synthesis:none] text-[14px];
+    --teal: #126b61;
+    --border: #e2e9e6;
+    --muted: #748780;
+  }
+  * {
+    @apply box-border;
+  }
+  body {
+    @apply m-0;
+  }
+  button,
+  input,
+  select,
+  textarea {
+    @apply [font:inherit];
+  }
+  button,
+  a {
+    @apply [transition:background_0.15s,color_0.15s];
+  }
+  button {
+    @apply cursor-pointer [border:1px_solid_#d6e1dc] rounded-[7px] p-[10px_15px] [background:white] text-[#31534c] font-semibold;
+  }
+  button:hover {
+    @apply [background:#edf5f1];
+  }
+  button:disabled {
+    @apply opacity-[0.5] cursor-not-allowed;
+  }
+  .primary {
+    @apply [background:var(--teal)] border-brand text-[white];
+  }
+  .primary:hover {
+    @apply [background:#0b554e];
+  }
+  .link {
+    @apply p-[5px_0] [border:0] [background:none] text-brand text-left;
+  }
+  .wide {
+    @apply w-full;
+  }
+  a {
+    @apply text-brand no-underline;
+  }
+  h1,
+  h2,
+  h3,
+  p {
+    @apply mt-0;
+  }
+  h1 {
+    @apply text-[30px] tracking-[-1px] leading-[1.2] mb-[10px];
+  }
+  h2 {
+    @apply text-[19px] tracking-[-0.4px];
+  }
+  h3 {
+    @apply text-[15px];
+  }
+  p {
+    @apply leading-[1.65];
+  }
+  .muted {
+    @apply text-(--muted);
+  }
+  .small,
+  small {
+    @apply text-[12px];
+  }
+  small {
+    @apply block text-(--muted) leading-[1.6];
+  }
+  .eyebrow {
+    @apply text-[10px] tracking-[1.8px] font-bold text-[#72948a] mb-[11px];
+  }
+  .login-layout {
+    @apply min-h-screen grid grid-cols-[48%_52%];
+  }
+  .login-story {
+    @apply p-[65px_12%] [background:#113f39] text-[#f9f9ee] relative overflow-hidden flex flex-col;
+  }
+  .login-story:after {
+    @apply [content:''] absolute w-[700px] h-[700px] [border:1px_solid_#527b6550] rounded-[48%] bottom-[-520px] left-[-70px] [box-shadow:0_-30px_0_10px_#527b651a,0_-65px_0_20px_#527b6515,0_-100px_0_30px_#527b6510];
+  }
+  .brand-mark {
+    @apply h-[62px] w-[62px] [border:1px_solid_#91b1a77a] rounded-[50%] text-[22px] flex items-center justify-center relative tracking-[-2px];
+  }
+  .brand-mark span {
+    @apply absolute bottom-px text-[28px] tracking-normal;
+  }
+  .login-story > .eyebrow {
+    @apply mt-[65px] text-[#afc9bc];
+  }
+  .login-story h1 {
+    @apply text-[clamp(34px,4vw,60px)] font-medium leading-[1.15] tracking-[-2px];
+  }
+  .story-text {
+    @apply text-[#bed0c5] mt-[17px] text-[15px];
+  }
+  .story-footer {
+    @apply mt-auto pt-[90px] text-[#a5beb1] text-[12px] z-1;
+  }
+  .story-footer span {
+    @apply p-[0_16px];
+  }
+  .login-main {
+    @apply flex items-center justify-center p-[50px];
+  }
+  .login-card {
+    @apply w-[370px];
+  }
+  .login-card h2 {
+    @apply text-[30px];
+  }
+  .login-card form {
+    @apply mt-[30px];
+  }
+  .login-card > .small {
+    @apply mt-[45px];
+  }
+  .login-card > .link {
+    @apply mt-[20px];
+  }
+  label {
+    @apply flex flex-col gap-[7px] text-[12px] font-semibold text-[#4c655c] mb-[18px];
+  }
+  input,
+  select,
+  textarea {
+    @apply w-full p-[11px_12px] [border:1px_solid_#dce4df] rounded-[7px] [background:#fff] text-[#233f36] min-w-0;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    @apply [outline:2px_solid_#9ccabc] outline-offset-1;
+  }
+  textarea {
+    @apply min-h-[75px] resize-y;
+  }
+  .app-layout {
+    @apply flex min-h-screen;
+  }
+  .sidebar {
+    @apply fixed w-[228px] inset-[0_auto_0_0] [background:#fff] [border-right:1px_solid_var(--border)] p-[32px_19px_18px] flex flex-col z-15;
+  }
+  .brand {
+    @apply flex items-center gap-[11px] text-[17px] font-bold text-[#1c5347] p-[0_8px_35px];
+  }
+  .brand small {
+    @apply tracking-[2px] text-[9px] text-[#7d9487] mt-[5px];
+  }
+  .small-mark {
+    @apply h-[43px] w-[43px] text-[16px] shrink-0 border-[#bdd1c7];
+  }
+  .small-mark span {
+    @apply bottom-[-2px] text-[23px];
+  }
+  .nav-caption {
+    @apply text-[9px] font-bold tracking-[1.6px] text-[#9caea5] p-[0_15px] mb-[15px];
+  }
+  .sidebar nav {
+    @apply overflow-auto;
+  }
+  .sidebar nav button {
+    @apply flex items-center gap-[12px] w-full text-left [border:0] [background:none] m-[3px_0] p-[12px_14px] text-[12px] text-[#71847a] font-medium;
+  }
+  .sidebar nav button.active {
+    @apply [background:#e9f4ee] text-[#1c6a55] font-bold;
+  }
+  .app-icon {
+    @apply inline-block w-[19px] h-[19px] shrink-0 align-middle;
+  }
+  .sidebar nav .app-icon {
+    @apply opacity-[0.85];
+  }
+  .sidebar nav button.active .app-icon {
+    @apply opacity-[1];
+  }
+  .quick-actions .app-icon {
+    @apply w-[25px] h-[25px];
+  }
+  .signout .app-icon {
+    @apply w-[20px] h-[20px];
+  }
+  .sidebar nav b {
+    @apply ml-auto [background:#d4e9dc] rounded-[4px] p-[2px_6px];
+  }
+  .sidebar-bottom {
+    @apply flex items-center gap-[10px] mt-auto pt-[20px] [border-top:1px_solid_var(--border)] text-[11px];
+  }
+  .avatar {
+    @apply w-[32px] h-[32px] [background:#edf2e7] rounded-[50%] grid place-items-center text-[16px] text-[#6d8060];
+  }
+  .sidebar-bottom small {
+    @apply text-[9px];
+  }
+  .signout {
+    @apply [border:0] p-[5px] ml-auto text-[22px];
+  }
+  .workspace {
+    @apply ml-[228px] w-[calc(100%-228px)];
+  }
+  .topbar {
+    @apply h-[70px] [border-bottom:1px_solid_var(--border)] flex items-center justify-between p-[0_40px] [background:#ffffffb0];
+  }
+  .breadcrumb {
+    @apply text-[12px] text-[#6d8177];
+  }
+  .breadcrumb span {
+    @apply p-[0_14px] text-[#b5c4bb];
+  }
+  .topbar > div {
+    @apply flex items-center gap-[22px];
+  }
+  .language {
+    @apply text-[11px] p-[6px_10px];
+  }
+  .today {
+    @apply text-[11px] text-[#72877a];
+  }
+  main {
+    @apply p-[36px_40px] min-h-[calc(100vh-125px)];
+  }
+  .page-heading {
+    @apply flex items-center justify-between mb-[28px] gap-[20px];
+  }
+  .page-heading .muted {
+    @apply text-[12px] mb-0;
+  }
+  .page-heading > .primary {
+    @apply whitespace-nowrap;
+  }
+  .alert {
+    @apply p-[14px_17px] rounded-[8px] m-[0_0_20px] text-[12px] leading-[1.6] flex items-center justify-between gap-[15px];
+  }
+  .alert button {
+    @apply [border:0] [background:none] p-0 text-[20px];
+  }
+  .danger {
+    @apply [background:#fbeeea] text-[#9c4438];
+  }
+  .success {
+    @apply [background:#e7f3e9] text-[#336b43];
+  }
+  .info {
+    @apply [background:#edf3f5] text-[#54727e];
+  }
+  .setup-banner {
+    @apply [background:#eef2e7] [border:1px_solid_#dce6cf] rounded-[9px] p-[20px_23px] flex items-center justify-between mb-[25px] text-[#5d7345] gap-[20px];
+  }
+  .setup-banner strong {
+    @apply text-[13px];
+  }
+  .setup-banner p {
+    @apply text-[11px] m-[6px_0_0];
+  }
+  .setup-banner button {
+    @apply text-[11px] whitespace-nowrap bg-transparent border-[#b7c5a4];
+  }
+  .stats {
+    @apply grid grid-cols-[repeat(4,1fr)] gap-[18px] mb-[26px];
+  }
+  .stat {
+    @apply p-[24px] [background:#fff] [border:1px_solid_var(--border)] rounded-[9px] flex flex-col min-w-0;
+  }
+  .stat > span {
+    @apply text-[11px] text-[#7c8f80];
+  }
+  .stat strong {
+    @apply text-[35px] text-[#254b3c] font-medium m-[15px_0_10px] leading-none;
+  }
+  .stat small {
+    @apply text-[10px];
+  }
+  .stat .money-stat {
+    @apply text-[22px];
+  }
+  .panel {
+    @apply [background:white] [border:1px_solid_var(--border)] rounded-[10px] p-[25px] mb-[22px];
+  }
+  .section-heading {
+    @apply flex items-center justify-between gap-[15px] mb-[20px];
+  }
+  .section-heading h2 {
+    @apply m-[0_0_5px];
+  }
+  .section-heading p {
+    @apply m-0 text-[11px];
+  }
+  .dashboard-grid {
+    @apply grid grid-cols-[1.7fr_1fr] gap-[24px];
+  }
+  .dashboard-grid .panel {
+    @apply m-0;
+  }
+  .tag {
+    @apply inline-block rounded-[5px] [background:#eff2ed] text-[#73846f] p-[5px_8px] text-[10px] whitespace-nowrap capitalize;
+  }
+  .tag.teal,
+  .confirmed {
+    @apply [background:#e3f1e9] text-[#387659];
+  }
+  .checked_in {
+    @apply [background:#dcece9] text-[#1c6c63];
+  }
+  .reservation {
+    @apply [background:#e8e5f6] text-[#746294];
+  }
+  .maintenance {
+    @apply [background:#f6e8df] text-[#a67552];
+  }
+  .pending_approval {
+    @apply [background:#fff2d6] text-[#a48940];
+  }
+  .rejected,
+  .cancelled,
+  .no_show {
+    @apply [background:#f9e6e2] text-[#a16458];
+  }
+  .quick-actions {
+    @apply mt-[30px];
+  }
+  .quick-actions button {
+    @apply relative grid grid-cols-[40px_1fr] items-center text-left [border:0] [border-top:1px_solid_#edf1ec] rounded-none w-full p-[19px_0] [background:white];
+  }
+  .quick-actions button > span {
+    @apply row-[span_2] text-[24px] font-normal text-[#83a68f];
+  }
+  .quick-actions strong {
+    @apply text-[12px] font-semibold;
+  }
+  .quick-actions small {
+    @apply text-[10px];
+  }
+  .quick-actions b {
+    @apply absolute right-0 top-[25px] text-[#91a78f];
+  }
+  .financial-card {
+    @apply [background:#164c41] text-[#d5e5d4] p-[30px] rounded-[10px] flex flex-col;
+  }
+  .financial-card .eyebrow {
+    @apply text-[#a1c3a8];
+  }
+  .financial-card h2 {
+    @apply text-[34px] text-[white] font-medium m-[20px_0_7px];
+  }
+  .financial-card p {
+    @apply text-[10px] text-[#9fbfac];
+  }
+  .financial-card hr {
+    @apply w-full [border:0] [border-top:1px_solid_#ffffff26] m-[25px_0];
+  }
+  .financial-card > span {
+    @apply text-[11px] text-[#a8c6b3];
+  }
+  .financial-card > strong {
+    @apply text-[23px] font-medium m-[11px_0_30px];
+  }
+  .financial-card button {
+    @apply mt-auto bg-transparent text-[#d4e5d7] border-[#ffffff38] text-[11px];
+  }
+  .reminder {
+    @apply flex items-center gap-[18px] mt-[24px] [background:#f8faf6];
+  }
+  .reminder > span {
+    @apply text-[23px] text-[#8da18a];
+  }
+  .reminder strong {
+    @apply text-[12px];
+  }
+  .reminder p {
+    @apply text-[11px] m-[5px_0_0];
+  }
+  .toolbar {
+    @apply flex gap-[12px] [align-items:end] mb-[22px] flex-wrap;
+  }
+  .toolbar > input {
+    @apply max-w-[350px];
+  }
+  .toolbar select {
+    @apply w-auto max-w-[230px];
+  }
+  .toolbar label {
+    @apply m-0 max-w-[230px];
+  }
+  .toolbar .legend {
+    @apply ml-auto flex gap-[6px] flex-wrap;
+  }
+  .table-wrap {
+    @apply overflow-auto p-0;
+  }
+  table {
+    @apply w-full border-collapse text-left whitespace-normal text-[12px];
+  }
+  th {
+    @apply text-[10px] font-semibold tracking-[0.3px] text-[#7a8e7e] [background:#f9fbf8] p-[15px_19px] [border-bottom:1px_solid_var(--border)];
+  }
+  td {
+    @apply p-[18px_19px] [border-bottom:1px_solid_#edf1eb] align-middle;
+  }
+  td strong {
+    @apply font-semibold;
+  }
+  td small {
+    @apply text-[10px] mt-[5px];
+  }
+  tbody tr:last-child td {
+    @apply [border-bottom:0];
+  }
+  .empty {
+    @apply text-center text-[#8c9c8c] p-[60px];
+  }
+  .calendar table {
+    @apply min-w-[900px] table-fixed;
+  }
+  .calendar th:first-child {
+    @apply w-[140px] sticky left-0 z-1 [background:#f9fbf8];
+  }
+  .calendar td {
+    @apply p-[8px_5px] h-[65px];
+  }
+  .calendar-entry {
+    @apply [border:0] rounded-[5px] text-[10px] text-left w-full p-[10px_8px] min-h-[42px] overflow-hidden;
+  }
+  .free-cell {
+    @apply text-[9px] text-[#abb7aa] p-[5px];
+  }
+  .floor-group {
+    @apply mb-[30px];
+  }
+  .floor-group > h2 {
+    @apply text-[17px];
+  }
+  .floor-group > h2 span {
+    @apply ml-[10px];
+  }
+  .room-grid {
+    @apply grid grid-cols-[repeat(3,1fr)] gap-[17px];
+  }
+  .room-card {
+    @apply [background:white] [border:1px_solid_var(--border)] rounded-[9px] p-[21px];
+  }
+  .room-top {
+    @apply flex justify-between items-center mb-[23px];
+  }
+  .room-top > span:first-child {
+    @apply text-[11px] text-[#79907e] font-bold;
+  }
+  .room-card h3 {
+    @apply text-[19px] mb-[8px];
+  }
+  .room-card p {
+    @apply text-[11px] text-[#859381];
+  }
+  .room-meta {
+    @apply flex justify-between gap-[5px] text-[10px] text-[#91a08d] pt-[16px] [border-top:1px_solid_#edf1e9] mt-[18px];
+  }
+  .room-card > button {
+    @apply mt-[18px] w-full text-[11px] [background:#f9fbf7];
+  }
+  .tariff-panel > .table-wrap {
+    @apply m-[0_-25px_-25px];
+  }
+  .button-row {
+    @apply flex gap-[9px] items-center;
+  }
+  .button-row button {
+    @apply text-[11px];
+  }
+  .wrap {
+    @apply flex-wrap;
+  }
+  .account-panel {
+    @apply max-w-[600px];
+  }
+  .account-panel form {
+    @apply max-w-[420px] mt-[25px];
+  }
+  .loading {
+    @apply text-[11px] text-[#6f9a83];
+  }
+  .drawer-backdrop,
+  .modal-backdrop {
+    @apply fixed inset-0 [background:#163b354f] z-50 flex justify-end;
+  }
+  .drawer {
+    @apply [background:white] w-[640px] max-w-full p-[32px] overflow-auto [box-shadow:-8px_0_40px_#17342a18];
+  }
+  .drawer > .section-heading {
+    @apply [border-bottom:1px_solid_var(--border)] pb-[15px];
+  }
+  .guest-title {
+    @apply text-[24px] mt-[23px] mb-[10px];
+  }
+  .drawer > p {
+    @apply text-[12px];
+  }
+  .detail-grid {
+    @apply grid grid-cols-[1fr_1fr] gap-[20px] m-[26px_0];
+  }
+  .detail-grid small {
+    @apply text-[9px] tracking-[1px];
+  }
+  .detail-grid strong {
+    @apply text-[12px] block mt-[6px];
+  }
+  .bill-summary {
+    @apply [background:#f4f7ef] [border:1px_solid_#e5eadb] rounded-[8px] p-[18px] mb-[22px];
+  }
+  .bill-summary > div {
+    @apply flex justify-between text-[12px] m-[8px_0];
+  }
+  .bill-summary > div:last-child {
+    @apply [border-top:1px_solid_#dfe6d4] mt-[15px] pt-[15px] text-[15px];
+  }
+  .drawer > h3 {
+    @apply mt-[32px];
+  }
+  .history-item {
+    @apply p-[12px_0] [border-bottom:1px_solid_#edf0e9];
+  }
+  .history-item > strong {
+    @apply text-[12px];
+  }
+  .history-item > small {
+    @apply text-[10px] mt-[5px];
+  }
+  .history-item > p {
+    @apply text-[11px];
+  }
+  .attachment {
+    @apply block m-[10px_0];
+  }
+  .drawer input[type='file'] {
+    @apply text-[10px];
+  }
+  .modal-backdrop {
+    @apply z-60 items-center justify-center p-[25px];
+  }
+  .modal {
+    @apply [background:white] rounded-[12px] p-[30px] w-[560px] max-w-full max-h-[92vh] overflow-auto [box-shadow:0_15px_70px_#16382c44];
+  }
+  .large-modal {
+    @apply w-[850px];
+  }
+  .modal .section-heading {
+    @apply mb-[25px];
+  }
+  .form-grid {
+    @apply grid grid-cols-[1fr_1fr] gap-[0_18px];
+  }
+  .room-picker {
+    @apply grid grid-cols-[repeat(4,1fr)] gap-[10px] mb-[24px];
+  }
+  .room-picker button {
+    @apply text-left p-[12px_10px] text-[11px] font-normal flex flex-col gap-[5px];
+  }
+  .room-picker button strong {
+    @apply text-[12px];
+  }
+  .room-picker button small {
+    @apply text-[9px];
+  }
+  .room-picker .chosen {
+    @apply [background:#e4f2e9] border-[#67a186];
+  }
+  .modal-actions {
+    @apply flex gap-[12px] justify-end mt-[25px];
+  }
+  .quote {
+    @apply p-[18px] [background:#edf5e9] rounded-[7px] flex justify-between gap-[10px] text-[12px];
+  }
+  .quote > span {
+    @apply text-[10px];
+  }
+  .check-label {
+    @apply flex flex-row items-start gap-[10px] leading-[1.7];
+  }
+  .check-label input {
+    @apply w-[16px] mt-[3px] shrink-0;
+  }
+  .check-grid {
+    @apply grid grid-cols-[1fr_1fr] gap-[0_12px] m-[20px_0];
+  }
+  .danger-text {
+    @apply text-[#b37165];
+  }
+  footer {
+    @apply flex justify-between p-[18px_40px] text-[9px] text-[#9ca999] [border-top:1px_solid_var(--border)];
+  }
+  @media (min-width: 1500px) {
+    .workspace main {
+      @apply max-w-[1500px] m-auto;
+    }
+  }
+  @media (max-width: 1100px) {
+    .sidebar {
+      @apply w-[195px] pl-[12px] pr-[12px];
+    }
+    .workspace {
+      @apply ml-[195px] w-[calc(100%-195px)];
+    }
+    main {
+      @apply p-[28px_24px];
+    }
+    .stats {
+      @apply gap-[12px];
+    }
+    .stat {
+      @apply p-[18px];
+    }
+    .dashboard-grid {
+      @apply grid-cols-[1.3fr_1fr];
+    }
+    .room-grid {
+      @apply grid-cols-[repeat(2,1fr)];
+    }
+    .topbar {
+      @apply p-[0_24px];
+    }
+    .room-picker {
+      @apply grid-cols-[repeat(3,1fr)];
+    }
+  }
+  @media (max-width: 760px) {
+    .sidebar {
+      @apply relative w-full p-[15px] block;
+    }
+    .brand {
+      @apply p-[0_0_15px];
+    }
+    .sidebar nav {
+      @apply flex overflow-x-auto;
+    }
+    .sidebar nav button {
+      @apply w-auto whitespace-nowrap p-[10px] text-[11px];
+    }
+    .sidebar-bottom,
+    .nav-caption {
+      @apply hidden;
+    }
+    .app-layout {
+      @apply block;
+    }
+    .workspace {
+      @apply m-0 w-full;
+    }
+    .topbar {
+      @apply h-[54px] p-[0_20px];
+    }
+    .today {
+      @apply hidden;
+    }
+    main {
+      @apply p-[25px_18px];
+    }
+    .page-heading {
+      @apply items-start flex-col;
+    }
+    .page-heading h1 {
+      @apply text-[27px];
+    }
+    .stats {
+      @apply grid-cols-[1fr_1fr];
+    }
+    .dashboard-grid {
+      @apply grid-cols-[1fr];
+    }
+    .setup-banner {
+      @apply items-start flex-col;
+    }
+    .room-grid {
+      @apply grid-cols-[1fr];
+    }
+    .form-grid {
+      @apply grid-cols-[1fr];
+    }
+    .modal {
+      @apply p-[23px];
+    }
+    .modal-backdrop {
+      @apply p-[12px];
+    }
+    .room-picker {
+      @apply grid-cols-[1fr_1fr];
+    }
+    .quote {
+      @apply flex-col;
+    }
+    .section-heading {
+      @apply items-start flex-wrap;
+    }
+    .login-layout {
+      @apply grid-cols-[1fr];
+    }
+    .login-story {
+      @apply hidden;
+    }
+    .login-main {
+      @apply p-[35px] min-h-screen;
+    }
+    .login-card {
+      @apply w-full;
+    }
+    .drawer {
+      @apply p-[25px];
+    }
+    .toolbar input,
+    .toolbar label {
+      @apply max-w-full;
+    }
+    .toolbar {
+      @apply items-center;
+    }
+    .legend {
+      @apply ml-0!;
+    }
+    .check-grid {
+      @apply grid-cols-[1fr];
+    }
+    footer {
+      @apply p-[15px_18px] gap-[15px];
+    }
+    .topbar > div {
+      @apply gap-[10px];
+    }
+  }
+  @media print {
+    details > table {
+      @apply table!;
+    }
+    details {
+      @apply block!;
+    }
+    .sidebar,
+    .topbar,
+    footer,
+    .workspace main,
+    .modal-backdrop,
+    .drawer button,
+    .drawer input,
+    .drawer label {
+      @apply hidden!;
+    }
+    .drawer-backdrop {
+      @apply static [background:white] block;
+    }
+    .drawer {
+      @apply w-full max-w-none p-0 overflow-visible [box-shadow:none];
+    }
+    .drawer-backdrop .drawer {
+      @apply block;
+    }
+    .app-layout,
+    .workspace {
+      @apply block m-0 w-full;
+    }
+    .drawer > h3 {
+      @apply break-after-avoid;
+    }
+    .history-item {
+      @apply break-inside-avoid;
+    }
+  }
+
+  .booking-details-heading {
+    @apply sticky top-[-32px] z-2 [background:white] pt-[20px] mt-[-20px];
+  }
+  .edit-booking-button {
+    @apply inline-flex items-center gap-[7px] whitespace-nowrap;
+  }
+  .allocated-room + .allocated-room {
+    @apply mt-[8px];
+  }
+  .modal:has(#booking-editor) > .section-heading {
+    @apply sticky top-[-30px] z-2 [background:white] pt-[15px] mt-[-15px];
+  }
+  .modal-actions {
+    @apply sticky bottom-[-30px] [background:white] p-[16px_0] mb-[-15px] [border-top:1px_solid_var(--border)];
+  }
+  @media (max-width: 760px) {
+    .booking-details-heading {
+      @apply top-[-25px];
+    }
+    .modal:has(#booking-editor) > .section-heading {
+      @apply top-[-23px];
+    }
+    .modal-actions {
+      @apply bottom-[-23px];
+    }
+    .booking-details-heading .button-row {
+      @apply ml-auto;
+    }
+  }
+  @media print {
+    .booking-details-heading {
+      @apply static m-0 pt-0;
+    }
+    .edit-booking-button {
+      @apply hidden!;
+    }
+  }
+
+  /* Color mode: rendered before Vue mounts, saved per browser/device. */
+  :root {
+    @apply scheme-light;
+  }
+  .theme-toggle {
+    @apply inline-flex items-center justify-center gap-[7px] p-[7px_10px] text-[11px] min-h-[34px];
+  }
+  .theme-toggle .app-icon {
+    @apply w-[17px] h-[17px];
+  }
+  .login-main {
+    @apply relative;
+  }
+  .login-theme-control {
+    @apply absolute right-[32px] top-[28px];
+  }
+  .login-theme-control .theme-toggle {
+    @apply text-[12px] p-[10px_12px];
+  }
+  @media screen {
+    html[data-theme='dark'] {
+      @apply scheme-dark [background:#101a1a] text-[#e1ece8];
+      --teal: #71d4b9;
+      --border: #2a3d39;
+      --muted: #a1b5ac;
+    }
+    html[data-theme='dark'] body {
+      @apply [background:#101a1a] text-[#e1ece8];
+    }
+    html[data-theme='dark']
+      :is(
+        .sidebar,
+        .panel,
+        .stat,
+        .room-card,
+        .drawer,
+        .modal,
+        .booking-details-heading,
+        .modal-actions,
+        .modal:has(#booking-editor) > .section-heading
+      ) {
+      @apply [background:#192725] border-[#2a3d39] text-[#e1ece8];
+    }
+    html[data-theme='dark'] .topbar {
+      @apply [background:#14211f] border-[#2a3d39];
+    }
+    html[data-theme='dark'] :is(button, input, select, textarea) {
+      @apply [background:#1d302b] border-[#3a5149] text-[#e0eee6];
+    }
+    html[data-theme='dark'] button:hover {
+      @apply [background:#294138];
+    }
+    html[data-theme='dark'] :is(input, textarea)::placeholder {
+      @apply text-[#8da69b] opacity-[1];
+    }
+    html[data-theme='dark'] :is(input, select, textarea):focus {
+      @apply outline-[#69c7ac];
+    }
+    html[data-theme='dark'] input[type='checkbox'] {
+      @apply accent-[#62d1ac];
+    }
+    html[data-theme='dark'] label {
+      @apply text-[#c0d4c9];
+    }
+    html[data-theme='dark'] .primary {
+      @apply [background:#71d4b9] text-[#0d3025] border-[#71d4b9];
+    }
+    html[data-theme='dark'] .primary:hover {
+      @apply [background:#8ae0c7];
+    }
+    html[data-theme='dark'] :is(a, .link) {
+      @apply text-[#83dbc0];
+    }
+    html[data-theme='dark'] .link {
+      @apply bg-transparent [border:0];
+    }
+    html[data-theme='dark']
+      :is(.muted, .breadcrumb, .today, .stat > span, .room-card p, .room-meta, .nav-caption) {
+      @apply text-[#a1b5ac];
+    }
+    html[data-theme='dark'] small:not(.guest-booking-document *) {
+      @apply text-[#a1b5ac];
+    }
+    html[data-theme='dark'] .eyebrow {
+      @apply text-[#8bb9a4];
+    }
+    html[data-theme='dark'] .brand {
+      @apply text-[#b0e8d0];
+    }
+    html[data-theme='dark'] .brand small {
+      @apply text-[#95b9a3];
+    }
+    html[data-theme='dark'] .small-mark {
+      @apply border-[#527c65];
+    }
+    html[data-theme='dark'] .sidebar nav button {
+      @apply text-[#acbfb3] bg-transparent;
+    }
+    html[data-theme='dark'] .sidebar nav button:hover {
+      @apply [background:#243b30];
+    }
+    html[data-theme='dark'] .sidebar nav button.active {
+      @apply [background:#254936] text-[#a0efcc];
+    }
+    html[data-theme='dark'] .sidebar nav b {
+      @apply [background:#376148] text-[#c7f5d7];
+    }
+    html[data-theme='dark'] .avatar {
+      @apply [background:#324632] text-[#c2dbac];
+    }
+    html[data-theme='dark'] .stat strong {
+      @apply text-[#c6efda];
+    }
+    html[data-theme='dark'] .setup-banner {
+      @apply [background:#303c24] border-[#4d6240] text-[#d1e3b5];
+    }
+    html[data-theme='dark'] .setup-banner button {
+      @apply text-[#d1e3b5] border-[#778967] bg-transparent;
+    }
+    html[data-theme='dark'] .quick-actions button {
+      @apply [background:#192725] text-[#e1ece8] border-[#2a3d39];
+    }
+    html[data-theme='dark'] .quick-actions button:hover {
+      @apply [background:#21382e];
+    }
+    html[data-theme='dark'] .quick-actions button > span {
+      @apply text-[#88c2a0];
+    }
+    html[data-theme='dark'] .reminder {
+      @apply [background:#1b2a20];
+    }
+    html[data-theme='dark'] .financial-card {
+      @apply [background:#163f35] [border:1px_solid_#3a6651];
+    }
+    html[data-theme='dark'] .financial-card button {
+      @apply bg-transparent text-[#d8efdd];
+    }
+    html[data-theme='dark'] th:not(.guest-booking-document *) {
+      @apply [background:#152420] text-[#acbeb0] border-[#2a3d39];
+    }
+    html[data-theme='dark'] td:not(.guest-booking-document *) {
+      @apply border-[#2a3d39];
+    }
+    html[data-theme='dark'] .calendar th:first-child {
+      @apply [background:#152420];
+    }
+    html[data-theme='dark'] .free-cell {
+      @apply text-[#92a58d];
+    }
+    html[data-theme='dark'] :is(.room-meta, .history-item, .bill-summary > div:last-child) {
+      @apply border-[#35503b];
+    }
+    html[data-theme='dark'] .room-card > button {
+      @apply [background:#223629] text-[#c5dec8];
+    }
+    html[data-theme='dark'] :is(.bill-summary, .quote) {
+      @apply [background:#243521] border-[#3c5230] text-[#d8ebc8];
+    }
+    html[data-theme='dark'] .room-picker .chosen {
+      @apply [background:#2a4b37] border-[#91c69e] text-[#e3f8e5];
+    }
+    html[data-theme='dark'] .tag {
+      @apply [background:#35432d] text-[#c4d7af];
+    }
+    html[data-theme='dark'] :is(.tag.teal, .tag.confirmed, .calendar-entry.confirmed) {
+      @apply [background:#254d37] text-[#b8efcb];
+    }
+    html[data-theme='dark'] :is(.tag.checked_in, .calendar-entry.checked_in) {
+      @apply [background:#1c4b44] text-[#b4e8de];
+    }
+    html[data-theme='dark'] :is(.tag.reservation, .calendar-entry.reservation) {
+      @apply [background:#3e3456] text-[#ddccf5];
+    }
+    html[data-theme='dark'] :is(.tag.maintenance, .calendar-entry.maintenance) {
+      @apply [background:#533a29] text-[#f0c8a5];
+    }
+    html[data-theme='dark'] :is(.tag.pending_approval, .calendar-entry.pending_approval) {
+      @apply [background:#4c4121] text-[#f1d995];
+    }
+    html[data-theme='dark'] :is(.tag.rejected, .tag.cancelled, .tag.no_show, .danger) {
+      @apply [background:#4f302c] text-[#f4c1b5];
+    }
+    html[data-theme='dark'] .success {
+      @apply [background:#244430] text-[#bae0bc];
+    }
+    html[data-theme='dark'] .info {
+      @apply [background:#253e47] text-[#badbe7];
+    }
+    html[data-theme='dark'] .danger-text {
+      @apply text-[#f0aa9f];
+    }
+    html[data-theme='dark'] :is(.drawer-backdrop, .modal-backdrop) {
+      @apply [background:#030e0bb0];
+    }
+    html[data-theme='dark'] .login-main {
+      @apply [background:#101a1a];
+    }
+    html[data-theme='dark'] .login-story {
+      @apply [background:#0c3029];
+    }
+    html[data-theme='dark'] .login-story h1 {
+      @apply text-[#f0f5e9];
+    }
+    html[data-theme='dark'] footer:not(.guest-booking-document *) {
+      @apply text-[#9aaf99] border-[#2a3d39];
+    }
+    html[data-theme='dark'] .booking-sharing .pdf-button {
+      @apply [background:#472c2e] border-[#915357] text-[#ffc0c4];
+    }
+    html[data-theme='dark'] .booking-sharing .jpg-button {
+      @apply [background:#203d4b] border-[#4b829c] text-[#b1e5ff];
+    }
+    html[data-theme='dark'] .booking-sharing .share-button {
+      @apply [background:#214637] border-[#4b957b] text-[#a2efcf];
+    }
+    html[data-theme='dark'] .booking-sharing .booking-share-menu {
+      @apply [background:#152720] border-[#345443] text-[#e1ece8];
+    }
+    html[data-theme='dark'] .booking-sharing .booking-share-menu :is(a, button) {
+      @apply [background:#21362b] border-[#365843] text-[#c6ebd3];
+    }
+    html[data-theme='dark'] .booking-sharing :is(.share-unavailable, .booking-share-menu small) {
+      @apply text-[#b0cbb7];
+    }
+    html[data-theme='dark'] .booking-sharing .export-feedback {
+      @apply text-[#a3ddba];
+    }
+    html[data-theme='dark'] .booking-sharing .export-error {
+      @apply [background:#4f302c] text-[#f4c1b5];
+    }
+  }
+  @media (max-width: 760px) {
+    .topbar > div {
+      @apply gap-[7px];
+    }
+    .topbar .theme-toggle span {
+      @apply hidden;
+    }
+    .topbar .theme-toggle {
+      @apply w-[34px] p-[7px];
+    }
+    .login-theme-control {
+      @apply top-[20px] right-[20px];
+    }
+  }
+  @media print {
+    .theme-toggle,
+    .login-theme-control {
+      @apply hidden!;
+    }
+    :root {
+      @apply scheme-light!;
+    }
+  }
+}

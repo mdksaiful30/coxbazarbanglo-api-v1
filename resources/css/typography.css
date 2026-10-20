@@ -1,0 +1,72 @@
+@layer components {
+  /* Website type scale from Element.pdf. Downloaded booking documents keep their print scale. */
+  @media screen {
+    :root {
+      --font-h1: 44px;
+      --font-h2: 32px;
+      --font-h3: 24px;
+      --font-h4: 20px;
+      --font-h5: 16px;
+      --font-h6: 14px;
+      --font-body: 16px;
+      --font-lead: 19px;
+      --font-small: 13px;
+      @apply [font-size:var(--font-body)];
+    }
+
+    /* Override earlier component heading sizes with one consistent website hierarchy. */
+    :is(.app-layout, .login-layout) :is(h1, h2, h3, h4, h5, h6):not(.guest-booking-document *) {
+      @apply wrap-anywhere tracking-[normal];
+    }
+    :is(.app-layout, .login-layout) h1:not(.guest-booking-document *) {
+      @apply [font-size:var(--font-h1)]! font-bold! leading-[1.2]! tracking-[-0.02em];
+    }
+    :is(.app-layout, .login-layout) h2:not(.guest-booking-document *) {
+      @apply [font-size:var(--font-h2)]! font-semibold! leading-[1.28]!;
+    }
+    :is(.app-layout, .login-layout) h3:not(.guest-booking-document *) {
+      @apply [font-size:var(--font-h3)]! font-semibold! leading-[1.33]!;
+    }
+    :is(.app-layout, .login-layout) h4:not(.guest-booking-document *) {
+      @apply [font-size:var(--font-h4)]! font-semibold! leading-[1.4]!;
+    }
+    :is(.app-layout, .login-layout) h5:not(.guest-booking-document *) {
+      @apply [font-size:var(--font-h5)]! font-medium! leading-[1.45]!;
+    }
+    :is(.app-layout, .login-layout) h6:not(.guest-booking-document *) {
+      @apply [font-size:var(--font-h6)]! font-semibold! leading-[1.45]! uppercase tracking-[0.06em];
+    }
+    :is(.app-layout, .login-layout)
+      p:not(.eyebrow, .nav-caption, .small, .story-footer, .guest-booking-document *) {
+      @apply [font-size:var(--font-body)]! font-normal leading-[1.6]!;
+    }
+    :is(.app-layout, .login-layout) :is(p.lead, .story-text):not(.guest-booking-document *) {
+      @apply [font-size:var(--font-lead)]! font-normal leading-[1.6]!;
+    }
+    :is(.app-layout, .login-layout) :is(small, .small):not(.guest-booking-document *) {
+      @apply [font-size:var(--font-small)] font-normal leading-[1.45];
+    }
+    .page-heading > div,
+    .section-heading > div {
+      @apply min-w-0;
+    }
+    .section-heading {
+      @apply flex-wrap gap-y-[12px];
+    }
+    .login-card {
+      @apply max-w-full;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    :root {
+      --font-h1: 30px;
+      --font-h2: 25px;
+      --font-h3: 21px;
+      --font-h4: 18px;
+      --font-h6: 13px;
+      --font-lead: 17px;
+      --font-small: 12px;
+    }
+  }
+}

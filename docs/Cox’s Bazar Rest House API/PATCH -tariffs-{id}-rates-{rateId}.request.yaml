@@ -1,0 +1,15 @@
+$kind: http-request
+name: PATCH /tariffs/{id}/rates/{rateId}
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/tariffs/{{id}}/rates/{{rate_id}}"
+method: PATCH
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "amount_minor": 1
+    }
+order: 52000

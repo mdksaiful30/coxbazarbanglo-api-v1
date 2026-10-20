@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /credit-notes/{id}
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/credit-notes/{{id}}"
+method: GET
+headers:
+  Accept: application/json
+order: 22000

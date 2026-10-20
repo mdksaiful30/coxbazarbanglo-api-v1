@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /attachments/{id}/download
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/attachments/{{id}}/download"
+method: GET
+headers:
+  Accept: application/octet-stream
+order: 3000

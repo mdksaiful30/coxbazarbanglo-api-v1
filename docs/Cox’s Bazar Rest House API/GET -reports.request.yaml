@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /reports
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/reports?start=2027-01-01&end=2027-01-31"
+method: GET
+headers:
+  Accept: application/json
+order: 37000

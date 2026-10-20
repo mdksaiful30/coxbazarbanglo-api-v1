@@ -1,0 +1,23 @@
+$kind: http-request
+name: POST /bookings/{id}/check-in
+description: "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. "
+url: "{{base_url}}/api/v1/bookings/{{booking_id}}/check-in"
+method: POST
+headers:
+  Accept: application/json
+  Idempotency-Key: "{{request_idempotency_key}}"
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "version": {{booking_version}}
+    }
+scripts:
+  - type: beforeRequest
+    code: pm.variables.set("request_idempotency_key", pm.collectionVariables.get("retry_idempotency_key") || pm.variables.replaceIn("{{$guid}}"));
+    language: text/javascript
+  - type: afterResponse
+    code: if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set("booking_id",d.id);pm.collectionVariables.set("booking_version",d.version);}}
+    language: text/javascript
+order: 64000

@@ -1,0 +1,25 @@
+$kind: http-request
+name: POST /auth/mobile/login
+description: "Public endpoint. "
+url: "{{base_url}}/api/v1/auth/mobile/login"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "{{email}}",
+      "password": "{{password}}",
+      "device_name": "Postman device"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Login succeeded",()=>pm.response.to.have.status(200));
+      if(pm.response.code===200) pm.collectionVariables.set("token",pm.response.json().data.token);
+    language: text/javascript
+order: 1000

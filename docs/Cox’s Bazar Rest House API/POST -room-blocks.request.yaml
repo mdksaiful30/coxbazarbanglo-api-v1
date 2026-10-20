@@ -1,0 +1,26 @@
+$kind: http-request
+name: POST /room-blocks
+description: "Administrator only. Requires Idempotency-Key; reuse only for the same request body. "
+url: "{{base_url}}/api/v1/room-blocks"
+method: POST
+headers:
+  Accept: application/json
+  Idempotency-Key: "{{request_idempotency_key}}"
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "kind": "reservation",
+      "reason": "Approved office correction",
+      "room_ids": [
+        1
+      ],
+      "starts_at": "2027-01-01T14:00:00+06:00",
+      "ends_at": "2027-01-05T12:00:00+06:00"
+    }
+scripts:
+  - type: beforeRequest
+    code: pm.variables.set("request_idempotency_key", pm.collectionVariables.get("retry_idempotency_key") || pm.variables.replaceIn("{{$guid}}"));
+    language: text/javascript
+order: 82000

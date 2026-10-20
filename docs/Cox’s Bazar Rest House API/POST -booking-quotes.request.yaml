@@ -1,0 +1,23 @@
+$kind: http-request
+name: POST /booking-quotes
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/booking-quotes"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "guest_category_id": 1,
+      "room_ids": [
+        1
+      ],
+      "check_in_at": "2027-01-01T14:00:00+06:00",
+      "check_out_at": "2027-01-05T12:00:00+06:00",
+      "reference_letter": "Example reference_letter",
+      "guest_count": 1,
+      "notes": ""
+    }
+order: 58000

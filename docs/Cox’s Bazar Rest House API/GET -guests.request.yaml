@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /guests
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/guests"
+method: GET
+headers:
+  Accept: application/json
+order: 28000

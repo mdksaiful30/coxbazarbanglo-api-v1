@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /settings
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/settings"
+method: GET
+headers:
+  Accept: application/json
+order: 43000

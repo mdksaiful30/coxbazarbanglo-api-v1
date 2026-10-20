@@ -1,0 +1,10 @@
+# Use this workspace to collaborate
+workspace:
+  id: 7d749014-2f32-4390-85b9-19ef0eff27ca
+
+localResources:
+  collections:
+    - ../Cox’s Bazar Rest House API
+  specs:
+    - ../api-schema-base.json
+    - ../openapi.json

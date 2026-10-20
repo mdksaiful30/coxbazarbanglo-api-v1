@@ -1,0 +1,19 @@
+$kind: http-request
+name: POST /bookings/{id}/attachments
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/bookings/{{booking_id}}/attachments"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: formdata
+  content:
+    - type: file
+      key: file
+      src: []
+      description: Choose a PDF/JPG/PNG reference letter, max 5 MB.
+scripts:
+  - type: afterResponse
+    code: if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set("booking_id",d.id);pm.collectionVariables.set("booking_version",d.version);}}
+    language: text/javascript
+order: 62000

@@ -1,0 +1,21 @@
+$kind: collection
+description: "Run login first. Mutations change data: run individual operations in a test environment. Set booking_id/version from current detail. Leave retry_idempotency_key blank for new actions, pin it only for an identical retry. Binary requests return private files; use Send and Download. Twilio callback requires a valid provider signature."
+variables:
+  base_url: http://127.0.0.1:8013
+  token: ""
+  email: admin@cox-resthouse.test
+  password: REPLACE_WITH_YOUR_PASSWORD
+  new_password: REPLACE_WITH_STRONG_NEW_PASSWORD
+  reset_token: ""
+  id: "1"
+  booking_id: "1"
+  booking_version: "1"
+  rate_id: "1"
+  retry_idempotency_key: ""
+  twilio_signature: ""
+auth:
+  - id: a8a09ee4-f133-47ee-9e1a-42789277d765
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{token}}"

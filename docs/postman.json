@@ -1,0 +1,2797 @@
+{
+  "info": {
+    "name": "Cox’s Bazar Rest House API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Run login first. Mutations change data: run individual operations in a test environment. Set booking_id/version from current detail. Leave retry_idempotency_key blank for new actions, pin it only for an identical retry. Binary requests return private files; use Send and Download. Twilio callback requires a valid provider signature."
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://coxbazarbanglo.learnwithzaman.com"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "email",
+      "value": "admin@cox-resthouse.test"
+    },
+    {
+      "key": "password",
+      "value": "REPLACE_WITH_YOUR_PASSWORD"
+    },
+    {
+      "key": "new_password",
+      "value": "REPLACE_WITH_STRONG_NEW_PASSWORD"
+    },
+    {
+      "key": "reset_token",
+      "value": ""
+    },
+    {
+      "key": "id",
+      "value": "1"
+    },
+    {
+      "key": "booking_id",
+      "value": "1"
+    },
+    {
+      "key": "booking_version",
+      "value": "1"
+    },
+    {
+      "key": "rate_id",
+      "value": "1"
+    },
+    {
+      "key": "retry_idempotency_key",
+      "value": ""
+    },
+    {
+      "key": "twilio_signature",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "POST /auth/mobile/login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/mobile/login",
+        "description": "Public endpoint. ",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"device_name\": \"Postman device\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Login succeeded\",()=>pm.response.to.have.status(200));",
+              "if(pm.response.code===200) pm.collectionVariables.set(\"token\",pm.response.json().data.token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "DELETE /auth/devices/{id}",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/devices/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /attachments/{id}/download",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/octet-stream"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/attachments/{{id}}/download",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /audit-logs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/audit-logs",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /auth/devices",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/devices",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /auth/me",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/me",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /auth/preferences",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/preferences",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /availability",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/availability?check_in_at=2027-01-01T14%3A00%3A00%2B06%3A00&check_out_at=2027-01-05T12%3A00%3A00%2B06%3A00",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /booking-amendments/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/booking-amendments/{{id}}",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /bookings",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings",
+        "description": "Authenticated active staff/admin. "
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET /bookings/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}",
+        "description": "Authenticated active staff/admin. "
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET /bookings/{id}/exports/jpg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "image/jpeg"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/exports/jpg",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /bookings/{id}/exports/pdf",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/pdf"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/exports/pdf",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /bookings/{id}/guest-confirmation",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/guest-confirmation",
+        "description": "Authenticated active staff/admin. "
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET /bookings/{id}/share-options",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/share-options",
+        "description": "Authenticated active staff/admin. "
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET /bookings/{id}/shares",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/shares",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /buildings",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/buildings",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /buildings/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/buildings/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /calendar",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/calendar?start=2027-01-01&end=2027-01-31",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /catalog",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/catalog",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /credit-notes",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/credit-notes",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /credit-notes/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/credit-notes/{{id}}",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /dashboard",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/dashboard",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /floors",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/floors",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /floors/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/floors/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /guest-categories",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/guest-categories",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /guest-categories/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/guest-categories/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /guests",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/guests",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /guests/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/guests/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /invoices",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/invoices",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /invoices/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/invoices/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /notifications",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/notifications",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /payments",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/payments",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /payments/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/payments/{{id}}",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /properties",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/properties",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /properties/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/properties/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /reports",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/reports?start=2027-01-01&end=2027-01-31",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /reports/export",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/csv"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/reports/export?start=2027-01-01&end=2027-01-31",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /room-blocks",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/room-blocks",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /room-blocks/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/room-blocks/{{id}}",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /rooms",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/rooms",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /rooms/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/rooms/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /settings",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/settings",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /tariffs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/tariffs",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /tariffs/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/tariffs/{{id}}",
+        "description": "Authenticated active staff/admin. "
+      }
+    },
+    {
+      "name": "GET /users",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/users",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /users/{id}",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/users/{{id}}",
+        "description": "Administrator only. "
+      }
+    },
+    {
+      "name": "GET /version",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/version",
+        "description": "Public endpoint. ",
+        "auth": {
+          "type": "noauth"
+        }
+      }
+    },
+    {
+      "name": "PATCH /auth/preferences",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/preferences",
+        "description": "Authenticated active staff/admin. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"theme\": \"dark\",\n  \"language\": \"en\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "PATCH /bookings/{id}",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"guest_id\": 1,\n  \"guest_category_id\": 1,\n  \"room_ids\": [\n    1\n  ],\n  \"check_in_at\": \"2027-01-01T14:00:00+06:00\",\n  \"check_out_at\": \"2027-01-05T12:00:00+06:00\",\n  \"reference_letter\": \"Example reference_letter\",\n  \"guest_count\": 1,\n  \"notes\": \"\",\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PATCH /bookings/{id}/approved-details",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/approved-details",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"guest_id\": 1,\n  \"guest_category_id\": 1,\n  \"room_ids\": [\n    1\n  ],\n  \"check_in_at\": \"2027-01-01T14:00:00+06:00\",\n  \"check_out_at\": \"2027-01-05T12:00:00+06:00\",\n  \"reference_letter\": \"Example reference_letter\",\n  \"guest_count\": 1,\n  \"notes\": \"\",\n  \"version\": {{booking_version}},\n  \"reason\": \"Approved office correction\",\n  \"notify_guest\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PATCH /rooms/{id}",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/rooms/{{id}}",
+        "description": "Administrator only. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "PATCH /tariffs/{id}/rates/{rateId}",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/tariffs/{{id}}/rates/{{rate_id}}",
+        "description": "Administrator only. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount_minor\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /auth/forgot-password",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/forgot-password",
+        "description": "Public endpoint. ",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /auth/logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/logout",
+        "description": "Authenticated active staff/admin. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /auth/reset-password",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/reset-password",
+        "description": "Public endpoint. ",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"token\": \"{{reset_token}}\",\n  \"password\": \"{{new_password}}\",\n  \"password_confirmation\": \"{{new_password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /booking-amendments/{id}/approve",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/booking-amendments/{{id}}/approve",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /booking-amendments/{id}/reject",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/booking-amendments/{{id}}/reject",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /booking-quotes",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/booking-quotes",
+        "description": "Authenticated active staff/admin. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"guest_category_id\": 1,\n  \"room_ids\": [\n    1\n  ],\n  \"check_in_at\": \"2027-01-01T14:00:00+06:00\",\n  \"check_out_at\": \"2027-01-05T12:00:00+06:00\",\n  \"reference_letter\": \"Example reference_letter\",\n  \"guest_count\": 1,\n  \"notes\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /bookings",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"guest_id\": 1,\n  \"guest_category_id\": 1,\n  \"room_ids\": [\n    1\n  ],\n  \"check_in_at\": \"2027-01-01T14:00:00+06:00\",\n  \"check_out_at\": \"2027-01-05T12:00:00+06:00\",\n  \"reference_letter\": \"Example reference_letter\",\n  \"guest_count\": 1,\n  \"notes\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/amendments",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/amendments",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"guest_id\": 1,\n  \"guest_category_id\": 1,\n  \"room_ids\": [\n    1\n  ],\n  \"check_in_at\": \"2027-01-01T14:00:00+06:00\",\n  \"check_out_at\": \"2027-01-05T12:00:00+06:00\",\n  \"reference_letter\": \"Example reference_letter\",\n  \"guest_count\": 1,\n  \"notes\": \"\",\n  \"version\": {{booking_version}},\n  \"reason\": \"Approved office correction\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/approve",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/approve",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/attachments",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/attachments",
+        "description": "Authenticated active staff/admin. ",
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": [],
+              "description": "Choose a PDF/JPG/PNG reference letter, max 5 MB."
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/cancel",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/cancel",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/check-in",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/check-in",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/check-out",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/check-out",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/credit-notes",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/credit-notes",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount_minor\": 1,\n  \"reason\": \"Approved office correction\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/mark-no-show",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/mark-no-show",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/payments",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/payments",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount_minor\": 1,\n  \"method\": \"cash\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/reject",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/reject",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/return-for-correction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/return-for-correction",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Administrator enforced by booking service. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/share",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/share",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Recipient is the saved booking guest; arbitrary recipients are prohibited. Email supports PDF/JPG attachments; SMS and WhatsApp use text/approved templates. Use native device sharing for WhatsApp file attachments.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"channel\": \"email\",\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /bookings/{id}/submit",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/bookings/{{booking_id}}/submit",
+        "description": "Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"version\": {{booking_version}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(pm.response.code<300){const d=pm.response.json().data;if(d && d.id && d.version){pm.collectionVariables.set(\"booking_id\",d.id);pm.collectionVariables.set(\"booking_version\",d.version);}}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /buildings",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/buildings",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"property_id\": 1,\n  \"name\": \"Main building\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /floors",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/floors",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"building_id\": 1,\n  \"number\": 3,\n  \"name\": \"Third floor\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /guest-categories",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/guest-categories",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"D\",\n  \"name\": \"New category\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /guests",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/guests",
+        "description": "Authenticated active staff/admin. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Example Guest\",\n  \"mobile\": \"+8801712345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /messaging/twilio/status",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          },
+          {
+            "key": "X-Twilio-Signature",
+            "value": "{{twilio_signature}}",
+            "description": "Generate with the provider SDK using the exact callback URL and form fields."
+          }
+        ],
+        "url": "{{base_url}}/api/v1/messaging/twilio/status",
+        "description": "Public endpoint. ",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "AccountSid",
+              "value": "Example AccountSid",
+              "type": "text"
+            },
+            {
+              "key": "MessageSid",
+              "value": "Example MessageSid",
+              "type": "text"
+            },
+            {
+              "key": "MessageStatus",
+              "value": "Example MessageStatus",
+              "type": "text"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "POST /notifications/{id}/retry",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/notifications/{{id}}/retry",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /payments/{id}/refunds",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/payments/{{id}}/refunds",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount_minor\": 1,\n  \"reason\": \"Approved office correction\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /payments/{id}/reverse",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/payments/{{id}}/reverse",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Approved office correction\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /properties",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/properties",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Rest house\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /room-blocks",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/room-blocks",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"kind\": \"reservation\",\n  \"reason\": \"Approved office correction\",\n  \"room_ids\": [\n    1\n  ],\n  \"starts_at\": \"2027-01-01T14:00:00+06:00\",\n  \"ends_at\": \"2027-01-05T12:00:00+06:00\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /room-blocks/{id}/release",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/room-blocks/{{id}}/release",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Approved office correction\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /rooms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/rooms",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"floor_id\": 1,\n  \"code\": \"R401\",\n  \"name\": \"New room\",\n  \"ac_type\": \"ac\",\n  \"bed_type\": \"double\",\n  \"room_type\": \"standard\",\n  \"capacity\": 2,\n  \"bookable\": false,\n  \"housekeeping\": \"unverified\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /tariffs/{id}/activate",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/tariffs/{{id}}/activate",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"calculation_mode\": \"progressive\",\n  \"effective_from\": \"2027-01-01\",\n  \"check_in_time\": \"14:00\",\n  \"check_out_time\": \"12:00\",\n  \"turnaround_minutes\": 1,\n  \"notification_channel\": \"email\",\n  \"policy_acknowledged\": true,\n  \"reason\": \"Approved office correction\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /tariffs/{id}/clone",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/tariffs/{{id}}/clone",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Example Guest\",\n  \"reference\": \"Office reference\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /users",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/users",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Example Guest\",\n  \"email\": \"guest@example.test\",\n  \"role\": \"admin\",\n  \"active\": false,\n  \"password\": \"{{new_password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT /auth/password",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/auth/password",
+        "description": "Authenticated active staff/admin. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"current_password\": \"{{password}}\",\n  \"password\": \"{{new_password}}\",\n  \"password_confirmation\": \"{{new_password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "PUT /buildings/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/buildings/{{id}}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"property_id\": 1,\n  \"name\": \"Main building\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT /floors/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/floors/{{id}}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"building_id\": 1,\n  \"number\": 3,\n  \"name\": \"Third floor\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT /guest-categories/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/guest-categories/{{id}}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"D\",\n  \"name\": \"New category\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT /guests/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/guests/{{id}}",
+        "description": "Authenticated active staff/admin. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Example Guest\",\n  \"mobile\": \"+8801712345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "PUT /properties/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/properties/{{id}}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Rest house\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT /rooms/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{request_idempotency_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/rooms/{{id}}",
+        "description": "Administrator only. Requires Idempotency-Key; reuse only for the same request body. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"floor_id\": 1,\n  \"code\": \"R401\",\n  \"name\": \"New room\",\n  \"ac_type\": \"ac\",\n  \"bed_type\": \"double\",\n  \"room_type\": \"standard\",\n  \"capacity\": 2,\n  \"bookable\": false,\n  \"housekeeping\": \"unverified\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_idempotency_key\", pm.collectionVariables.get(\"retry_idempotency_key\") || pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT /users/{id}",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/users/{{id}}",
+        "description": "Administrator only. ",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Example Guest\",\n  \"email\": \"guest@example.test\",\n  \"role\": \"admin\",\n  \"active\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

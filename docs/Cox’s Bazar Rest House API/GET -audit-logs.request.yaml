@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /audit-logs
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/audit-logs"
+method: GET
+headers:
+  Accept: application/json
+order: 4000

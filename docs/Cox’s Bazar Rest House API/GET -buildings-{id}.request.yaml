@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /buildings/{id}
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/buildings/{{id}}"
+method: GET
+headers:
+  Accept: application/json
+order: 18000

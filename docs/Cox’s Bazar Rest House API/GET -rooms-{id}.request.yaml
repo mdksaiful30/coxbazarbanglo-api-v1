@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /rooms/{id}
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/rooms/{{id}}"
+method: GET
+headers:
+  Accept: application/json
+order: 42000

@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /bookings/{id}/exports/pdf
+description: "Authenticated active staff/admin. "
+url: "{{base_url}}/api/v1/bookings/{{booking_id}}/exports/pdf"
+method: GET
+headers:
+  Accept: application/pdf
+order: 13000

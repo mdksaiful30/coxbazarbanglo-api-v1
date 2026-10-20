@@ -1,0 +1,12 @@
+$kind: http-request
+name: PATCH /rooms/{id}
+description: "Administrator only. "
+url: "{{base_url}}/api/v1/rooms/{{id}}"
+method: PATCH
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: "{}"
+order: 51000

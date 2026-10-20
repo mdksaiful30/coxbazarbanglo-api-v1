@@ -1,0 +1,28 @@
+$kind: http-request
+name: PUT /rooms/{id}
+description: "Administrator only. Requires Idempotency-Key; reuse only for the same request body. "
+url: "{{base_url}}/api/v1/rooms/{{id}}"
+method: PUT
+headers:
+  Accept: application/json
+  Idempotency-Key: "{{request_idempotency_key}}"
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "floor_id": 1,
+      "code": "R401",
+      "name": "New room",
+      "ac_type": "ac",
+      "bed_type": "double",
+      "room_type": "standard",
+      "capacity": 2,
+      "bookable": false,
+      "housekeeping": "unverified"
+    }
+scripts:
+  - type: beforeRequest
+    code: pm.variables.set("request_idempotency_key", pm.collectionVariables.get("retry_idempotency_key") || pm.variables.replaceIn("{{$guid}}"));
+    language: text/javascript
+order: 94000

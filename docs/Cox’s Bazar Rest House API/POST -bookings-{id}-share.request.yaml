@@ -1,0 +1,21 @@
+$kind: http-request
+name: POST /bookings/{id}/share
+description: Authenticated active staff/admin. Requires Idempotency-Key; reuse only for the same request body. Recipient is the saved booking guest; arbitrary recipients are prohibited. Email supports PDF/JPG attachments; SMS and WhatsApp use text/approved templates. Use native device sharing for WhatsApp file attachments.
+url: "{{base_url}}/api/v1/bookings/{{booking_id}}/share"
+method: POST
+headers:
+  Accept: application/json
+  Idempotency-Key: "{{request_idempotency_key}}"
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "channel": "email",
+      "version": {{booking_version}}
+    }
+scripts:
+  - type: beforeRequest
+    code: pm.variables.set("request_idempotency_key", pm.collectionVariables.get("retry_idempotency_key") || pm.variables.replaceIn("{{$guid}}"));
+    language: text/javascript
+order: 71000
